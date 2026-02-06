@@ -1,0 +1,124 @@
+<div>
+    <div class="hero medium-height jarallax" data-jarallax data-speed="0.2">
+            <img class="jarallax-img" src="{{ asset('assets/img/actualidad_riviera_blog.webp') }}" alt="">
+            <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                <div class="container">
+                    <small class="slide-animated one">Pandora</small>
+                    <h1 class="slide-animated two">Tienda</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /Background Img Parallax -->
+
+        <div class="container margin_120_95">
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="isotope-wrapper">
+                        <div class="row justify-content-center">
+                            @if(!$categoriaId && ! $subcategoriaId)
+                                @foreach (categoriasPublicas() as $categoria)
+                                    <div class="item col-xl-4 col-lg-6 mb-4" wire:click.prevent="$set('categoriaId' , {{ $categoria->id }})" wire:key="cat-{{ $categoria->id }}">
+                                        <div class="position-relative">
+                                            <img src="{{ $categoria->imagen() }}" alt="" class="img-aliado mb-4">
+                                            <div class="position-absolute bottom-0 left-0 w-100 h-full d-flex align-items-center justify-content-center text-center mb-4">
+                                                <span class="btn_1 mb-4 bg-blue-pri">
+                                                    {{ $categoria->nombre }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                            @if($categoriaId && ! $subcategoriaId)
+                                @foreach (findCategoria($categoriaId)->subcategorias as $subcategoria)
+                                    <div class="item col-xl-4 col-lg-6 mb-4" wire:click.prevent="$set('subcategoriaId' , {{ $subcategoria->id }})" wire:key="subcat-{{ $subcategoria->id }}">
+                                        <div class="position-relative">
+                                            <img src="{{ $subcategoria->imagen() }}" alt="" class="img-aliado mb-4">
+                                            <div class="position-absolute bottom-0 left-0 w-100 h-full d-flex align-items-center justify-content-center text-center mb-4">
+                                                <span class="btn_1 mb-4 bg-blue-pri">
+                                                    {{ $subcategoria->nombre }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="row">
+                            @foreach ($productos as $producto)
+                                <div class="item col-xl-4 col-lg-6 mb-4">
+                                    @include('includes.producto')
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--/row -->
+                    </div>
+                    <!--/isotope-wrapper -->
+                    @if($subcategoriaId)
+                        <div class="d-flex justify-content-center">
+                            {{ $productos->links('includes.pagination') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="col-lg-3">
+                <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
+                    <!-- Search Widget -->
+                    <div class="widget ltn__search-widget">
+                        <form action="#">
+                            <input type="text" name="search" placeholder="Buscar..." class="form-control" wire:model.live="buscar">
+                            <!-- <button type="submit"><i class="icon-magnifier"></i></button> -->
+                        </form>
+                    </div>
+                    <!-- Price Filter Widget -->
+                    <!-- <div class="widget ltn__price-filter-widget">
+                        <h4 class="ltn__widget-title">Price</h4>
+                        <div class="price_filter">
+                            <div class="price_slider_amount">
+                                <input type="submit"  value="Your range:"/> 
+                                <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
+                            </div>
+                            <div class="slider-range"></div>
+                        </div>
+                    </div> -->
+                    <!-- Category Widget -->
+                    <div class="widget ltn__menu-widget">
+                        <h4 class="ltn__widget-title my-4">Categorías</h4>
+                        <div class="list-group list-group-flush">    
+                            <a href="#" wire:click.prevent="$set('categoriaId' , null )" class="list-group-item {{ $categoriaId == null ? 'active' : '' }}">Todas</a>
+                            @foreach(categoriasPublicas() as $categoria)
+                                <a href="#" wire:click.prevent="$set('categoriaId' , {{ $categoria->id }})" class="list-group-item {{ $categoriaId == $categoria->id ? 'active' : '' }}">{{ $categoria->nombre }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                    
+
+                </aside>
+            </div>
+            </div>
+            
+
+            <!-- <div class="pagination__wrapper">
+                <ul class="pagination">
+                    <li><a href="#0" class="prev"><i class="bi bi-arrow-left-short"></i></a></li>
+                    <li>
+                        <a href="#0" class="active">1</a>
+                    </li>
+                    <li>
+                        <a href="#0">2</a>
+                    </li>
+                    <li>
+                        <a href="#0">3</a>
+                    </li>
+                    <li>
+                        <a href="#0">4</a>
+                    </li>
+                    <li><a href="#0" class="next"><i class="bi bi-arrow-right-short"></i></a></li>
+                </ul>
+            </div> -->
+            <!-- /pagination -->
+
+        </div>
+        <!--/container -->
+</div>

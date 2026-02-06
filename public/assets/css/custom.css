@@ -1,0 +1,165 @@
+/*============================================================================================*/
+/* Your custom styles below */
+/*============================================================================================*/
+
+.text-beige {
+    color: #b4ac9a !important;
+}
+
+header nav ul {
+    text-align: center;
+}
+
+.titulo-nosotros {
+    color: #b4ac9a !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+.descripcion-nosotros {
+    color: #b4ac9a !important;
+}
+
+.banner_1_fondo{
+    background-image: url('../img/cama.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.banner_1_fondo .contenido{
+    z-index: 10!important;
+    position: relative;
+}
+
+.banner_1_fondo::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1!important;
+}
+
+.banner_1_fondo .titulo{
+    color: #b5ae9c;
+    font-weight: 600;
+}
+
+.banner_1_fondo .descripcion{
+    color: #b5ae9c;
+    font-weight: 600;
+}
+.img-aliado{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.7);
+    transition: filter 0.7s ease;
+}
+
+/* .img-aliado:hover {
+    filter: brightness(0.9);
+
+} */
+.img-producto-prev{
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.img-producto-prev::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1!important;
+}
+.img-producto-prev:hover::before{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.img-producto-prev .botones-producto{
+       opacity: 0;
+       transition: all 0.3s ease-in-out;
+       z-index: 2;  
+}
+.img-producto-prev:hover .botones-producto{
+       opacity: 1;
+}
+.img-producto-prev:hover .botones-producto a{
+       color: #fff;
+       background-color: #015571;
+}
+
+/* Submenu Hover Desktop */
+@media (min-width: 992px) {
+    .main-menu ul li {
+        position: relative;
+    }
+
+    .dropdown-menu{
+        padding: 1rem;
+    }
+
+    .dropdown-menu li:first-child {
+        margin-left: 25px !important;
+    }
+
+    .dropdown-menu li{
+        transition: all 0.3s ease-in-out;
+        border-bottom-style: solid;
+        border-bottom-color: #ffffff;
+        border-bottom-width: 2px;
+        display: block;
+    }
+
+    .dropdown-menu li:hover{
+        border-bottom-color: #015571;
+        border-bottom-width: 2px;
+    }
+    
+    .main-menu ul li:hover > ul.dropdown-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+        left: 0;
+        margin-top: 0;
+        animation: fadeIn 0.3s;
+        width: 300px;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/* Mobile Submenu */
+@media (max-width: 991px) {
+    .main-menu ul li > ul.dropdown-menu {
+        display: block; /* Always show in mobile since parent is a link */
+        position: static;
+        visibility: visible;
+        opacity: 1;
+        width: 100%;
+        box-shadow: none;
+        background: transparent;
+        border: none;
+        padding-left: 20px;
+        margin-top: 0;
+    }
+    
+    .main-menu ul li > ul.dropdown-menu li a {
+        padding-left: 15px !important;
+        color: #555; /* Adjust based on theme */
+    }
+}
