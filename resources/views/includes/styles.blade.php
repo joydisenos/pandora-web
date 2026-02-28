@@ -10,8 +10,8 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(to top, rgba(151, 134, 103, 0.9) 0%, rgba(151, 134, 103, 0.7) 100%);
-        padding: 20px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+        padding: 25px;
         transform: translateY(-100%);
         opacity: 0;
         transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
@@ -24,7 +24,7 @@
     }
 
     .descripcion-prod h5 {
-        color: #ffffff !important;
+        color: #000000 !important;
     }
 
     .img-prod-principal{
@@ -40,12 +40,109 @@
     }
 
     .text-primary{
-        color: #978667 !important;
+        color: #D48A1F !important;
     }
 
     .bg-blue-pri{
-        background-color: #978667;
+        background-color: #D48A1F;
         color: #ffffff !important;
+    }
+
+    .titulo-interno{
+        color: #D48A1F;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .autor-testimonio{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #ffffff;
+        margin-bottom: 30px;
+    }
+
+    .autor-testimonio img{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .testimonios .slick-track {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .text-bubble{
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 3px;
+        margin-bottom: 25px;
+        text-align: center;
+        position: relative;
+    }
+
+    .text-bubble::after {
+        content: '';
+        position: absolute;
+        bottom: -10px; /* Posición del pico hacia abajo */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .frame-producto{
+        border: solid thin transparent;
+        transition: all ease 0.7s;
+        padding:20px;
+    }
+
+    .frame-producto:hover{
+        border: solid thin #D48A1F;
+    }
+
+    .size-price{
+        font-size: 20px;
+    }
+
+    .precio-antes{
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+
+    .cantidad-carrito{
+        height:45px;
+        width: 40px;
+        text-align: center;
+    }
+
+    .card-nosotros{
+        height: 400px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-nosotros .card-content{
+        width: 100%;
+    }
+
+    .card-nosotros .titulo-card{
+        font-size: 28px;
+        color: #D48A1F;
+        font-weight: 600;
+    }
+
+    .card-nosotros .descripcion-card{
+        font-size: 18px;
     }
 
     @media screen and (min-width: 1200px) {
@@ -57,18 +154,31 @@
         }
     }
 
-    .list-group-item.active{
-        background-color: #978667;
+    .btn-cats{
+        padding: 15px 30px;
+        border: solid thin #D48A1F;
+        color: #D48A1F;
+        border-radius: 0px;
+    }
+
+    .btn-cats.active{
+        border: solid thin #000000;
         color: #ffffff;
-        border-color: #978667;
+        background: #000000;
+    }
+
+    .list-group-item.active{
+        background-color: #000000;
+        color: #ffffff;
+        border-color: #000000;
     }
 
     .cursor-pointer{
         cursor: pointer;
     }
     .btn-pri-claro{
-        border: dashed 3px #978667;
-        color: #978667;
+        border: dashed 3px #D48A1F;
+        color: #D48A1F;
         text-transform: uppercase;
         background: transparent;
         outline: none;
@@ -85,14 +195,14 @@
     }
 
     .btn-pri-claro:hover{
-        background-color: #978667;
+        background-color: #D48A1F;
         text-decoration: none;
         color: #ffffff;
     }
     
     .btn-pri-oscuro{
         color: #FFFFFF;
-        background-color: #978667;
+        background-color: #D48A1F;
         font-size: 14px;
         margin-bottom: 0;
         border-radius: 30px;
@@ -104,7 +214,7 @@
     }
 
     .btn-pri-oscuro:hover{
-        background-color: #978667;
+        background-color: #D48A1F;
         text-decoration: none;
         color: #ffffff;
     }
@@ -188,7 +298,7 @@
     }
     .cart-bt:hover{
         background-color: rgba(255, 255, 255, 0.8);
-        color: #978667;
+        color: #D48A1F;
     }
     .cart-bt svg{
         margin-right: 5px;
@@ -244,7 +354,7 @@
     }
     .card-producto-home-content a{
         color: #ffffff;
-        background-color: #978667;
+        background-color: #D48A1F;
         font-size: 14px;
         margin-bottom: 0;
         border-radius: 30px;
@@ -288,7 +398,7 @@
         width: 40px;
         padding: 10px;
         border: none;
-        background-color: #978667;
+        background-color: #D48A1F;
         border-radius: 50%;
         color: #ffffff;
     }

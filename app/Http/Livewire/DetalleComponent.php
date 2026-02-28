@@ -40,8 +40,8 @@ class DetalleComponent extends Component
     {
         // Validar si el producto tiene tallas y no se ha seleccionado una
         $producto = Producto::find($this->productoId);
-        $tallas = $producto->talla ? explode(',' , $producto->talla) : [];
-        $colores = $producto->color ? explode(',' , $producto->color) : [];
+        $tallas = trim($producto->talla) ? explode(',' , trim($producto->talla)) : [];
+        $colores = trim($producto->color) ? explode(',' , trim($producto->color)) : [];
 
         if(count($tallas) > 0 && !$this->tallaSeleccionada)
         {
@@ -67,8 +67,8 @@ class DetalleComponent extends Component
     public function render()
     {
         $producto = Producto::find($this->productoId);
-        $tallas = explode(',' , $producto->talla);
-        $colores = explode(',' , $producto->color);
+        $tallas = trim($producto->talla) ? explode(',' , trim($producto->talla)) : [];
+        $colores = trim($producto->color) ? explode(',' , trim($producto->color)) : [];
 
         if($producto->video_link)
         {
@@ -84,7 +84,10 @@ class DetalleComponent extends Component
             'variablePrecio' => $variablePrecio,
             'variantes' => $producto->variantes($this->talla , $this->medida , $this->color),
             'comentarios' => $producto->padre ? $producto->padre->comentarios : $producto->comentarios,
-            'subproductos' => Producto::where('id_padre', $producto->id)->where('estatus', 1)->get(),
+            'subproductos' => Producto::where(function($query) use($producto){
+                $query->where('id_padre', $producto->id)
+                        ->orWhere('id_padre', $producto->id_producto);
+            })->where('estatus', 1)->get(),
         ];
 
         return view('livewire.detalle-component' , $data);

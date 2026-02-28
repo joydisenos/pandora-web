@@ -100,13 +100,13 @@
                             <h6 class="mb-3">Productos Solicitados:</h6>
 
 							@foreach($items as $item)
-                            <div class="d-flex align-items-center mb-3 pb-2 border-bottom">
-                                <img src="{{ $item->attributes->imagen }}" alt="Producto" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-0">{{ $item->name }}</h6>
-                                    <p class="text-muted mb-0">Cantidad: {{ $item->quantity }}</p>
+                                <div class="d-flex align-items-center mb-3 pb-2 border-bottom">
+                                    <img src="{{ $item->attributes->imagen }}" alt="Producto" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">{{ $item->name }}</h6>
+                                        <p class="text-muted mb-0">Cantidad: {{ $item->quantity }} | Total: ${{ $item->quantity * $item->price }}</p>
+                                    </div>
                                 </div>
-                            </div>
 							@endforeach
                         
                         <!-- <div class="mb-4">
@@ -118,15 +118,14 @@
                             </ul>
                         </div> -->
                         
-                        <hr>
                         
-                        <!-- <div class="mb-4">
-                            <p class="text-muted small">
-                                <i class="bi bi-info-circle me-1"></i>
-                                Una vez enviada tu solicitud, nos pondremos en contacto contigo para proporcionarte un presupuesto detallado y personalizado.
+                        
+                        <div class="mb-0">
+                            <p class="text-muted small text-right mb-0">
+                                <strong>Total: ${{ $total }}</strong>
                             </p>
-                        </div> -->
-                        
+                        </div>
+                        <hr>
                         <!-- <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="terminos" required>
                             <label class="form-check-label small" for="terminos">

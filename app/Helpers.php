@@ -246,6 +246,7 @@ if (! function_exists('productosEnOferta')) {
                             ->where('id_padre' , null)
                             ->where('estatus' , 1)
                             ->where('flag_activo' , 1 )
+                            ->orderBy('updated_at')
                             ->limit($limit)
                             ->get();
         return $productos;

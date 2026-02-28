@@ -188,7 +188,15 @@
     <script>
         $('body').on('click', '.agregar-carrito', function (e) {
             e.preventDefault();
-            Livewire.emit('addProducto', $(this).data('id') );
+            // Buscar el input .cantidad-carrito dentro del mismo frame-producto
+            var cantidad = $(this).closest('.frame-producto').find('.cantidad-carrito').val();
+            var productoId = $(this).data('id');
+
+            // Asegurar que la cantidad sea al menos 1
+            cantidad = parseInt(cantidad) || 1;
+            if (cantidad < 1) cantidad = 1;
+
+            Livewire.emit('addProducto', productoId, cantidad);
         });
         $('body').on('click', '.agregar-carrito-detalle', function (e) {
             e.preventDefault();

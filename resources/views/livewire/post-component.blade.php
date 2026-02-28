@@ -131,7 +131,7 @@
                                         />
                                     </div>
                                 </div>
-
+<!-- 
                                 <div class="col-md-4 mb-4">
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">Categoría</span>
@@ -142,7 +142,7 @@
                                             @endforeach
                                         </select>
                                     </div> 
-                                </div>
+                                </div> -->
 
                                 
                                

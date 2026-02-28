@@ -40,7 +40,7 @@
 											<h5 class="mb-1">{{ $item->name }}</h5>
 										</div>
 										<div class="col-md-2">
-											<p class="mb-0 fw-bold">{{ $item->qty }}</p>
+											<p class="mb-0 fw-bold">${{ $item->price }}</p>
 										</div>
 										<div class="col-md-3">
 											<div class="input-group input-group-sm mb-4">

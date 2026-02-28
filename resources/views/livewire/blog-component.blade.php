@@ -1,6 +1,6 @@
 <div>
     <!--blog-sec-->
-    <div class=" blog-posts blogpage-section w-100 float-left">
+    <div class="my-4 blog-posts blogpage-section w-100 float-left">
         <div class="container">
             <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                 <div id="blog" class="col-xl-12">
@@ -12,7 +12,7 @@
                                     <div class="post-item-wrap position-relative">
                                         <div class="post-image">
                                             <a href="{{ route('blog.detalle' , $post->slug) }}">
-                                                <img alt="" src="{{ $post->imagen() }}">
+                                                <img alt="" src="{{ $post->imagen() }}" class="img-fluid">
                                             </a>
                                         </div>
                                         <div class="lower-portion">

@@ -105,7 +105,8 @@ class ProductosComponent extends Component
                                 ->paginate(10);
 
         if($this->productoId && $this->modo == 'edit' && !$this->padreId){
-            $this->subproductos = Producto::where('id_padre', $this->productoId)->get();
+            $productoRef = Producto::find($this->productoId);
+            $this->subproductos = Producto::where('id_padre', $this->productoId)->orWhere('id_padre' , $productoRef->id_producto)->get();
         }
 
         $data = [

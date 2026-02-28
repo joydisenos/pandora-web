@@ -230,17 +230,24 @@ class Producto extends Model
 
     public function precio($cantidad = 1)
     {
+        if($this->precio == 0 && $this->subProductos()->count())
+        {
+            $prod = $this->subProductos()->first();
+            if($prod)
+            {
+                return $prod->precio;
+            }
+        }
+        // if($this->variablePrecio->count())
+        // {
+        //     return $this->consultarPrecio($this->id , $cantidad);
+        // }
+
+        // if($this->padre && $this->padre->variablePrecio->count())
+        // {
+        //     return $this->consultarPrecio($this->padre->id , $cantidad);
+        // }
         
-        if($this->variablePrecio->count())
-        {
-            return $this->consultarPrecio($this->id , $cantidad);
-        }
-
-        if($this->padre && $this->padre->variablePrecio->count())
-        {
-            return $this->consultarPrecio($this->padre->id , $cantidad);
-        }
-
         return $this->precio;
     }
 
@@ -462,6 +469,15 @@ class Producto extends Model
     public function subCategoria()
     {
         return $this->belongsTo(Categoria::class , 'subcategoria_id');
+    }
+
+    public function subProductos()
+    {
+        return Producto::where(function($query){
+                $query->where('id_padre', $this->id)
+                        ->orWhere('id_padre', $this->id_producto);
+            })->where('estatus', 1)
+            ->get();
     }
 
     public function marca()

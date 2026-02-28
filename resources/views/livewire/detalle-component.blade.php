@@ -57,7 +57,7 @@
                                 <select class="form-control" id="subProductSelect" onchange="updateProductSelection(this)">
                                     <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                                     @foreach($subproductos as $sub)
-                                        <option value="{{ $sub->id }}">{{ $sub->nombre }}</option>
+                                        <option value="{{ $sub->id }}" data-price="{{ $sub->precio }}">{{ $sub->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,9 +65,26 @@
                                 function updateProductSelection(select) {
                                     var selectedOption = select.options[select.selectedIndex];
                                     var productId = selectedOption.value;
+                                    var productPrice = selectedOption.dataset.price;
+                                    
                                     var btn = document.querySelector('.agregar-carrito-detalle');
                                     if(btn) {
                                         btn.setAttribute('data-id', productId);
+                                        if(productPrice > 0) {
+                                            // solo habilita si es mayor a 0
+                                            btn.removeAttribute('disabled'); // Habilita el botón
+                                            btn.classList.remove('disabled'); // Remueve clase CSS si existe
+                                            btn.disabled = false; // Alternativa para habilitar
+                                        } else {
+                                            // Opcional: deshabilitar si el precio es 0 o negativo
+                                            btn.setAttribute('disabled', 'disabled');
+                                            btn.classList.add('disabled');
+                                            btn.disabled = true;
+                                        }
+                                    }
+                                    var price = document.querySelector('.precio-pri');
+                                    if(price) {
+                                        price.textContent = '$' + productPrice;
                                     }
                                 }
                             </script>
@@ -103,18 +120,22 @@
                             <label class="form-label">Cantidad:</label>
                             <div class="input-group" style="width: 150px;">
                                 <!-- <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button> -->
-                                <input type="number" class="form-control text-center" min="1" wire:model="cantidad">
+                                <input type="number" class="form-control text-center" min="1" value="1" id="quantityInput">
                                 <!-- <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button> -->
                             </div>
                         </div>
 
                         <div class="product-actions mb-4">
-                            <button class="btn-pri-claro me-2" wire:click.prevent="agregarAlCarrito">
+                            <button class="btn-pri-claro me-2 agregar-carrito-detalle" data-id="{{ $producto->id }}" {{ $producto->precio <= 0 ? 'disabled' : '' }}>
                                 <i class="fas fa-shopping-cart mr-2"></i>Agregar al Carrito
                             </button>
                             <!-- <button class="btn btn-outline-secondary btn-lg">
                                 <i class="far fa-heart me-2"></i>Favoritos
                             </button> -->
+                        </div>
+
+                        <div class="producto-price">
+                            <h2 class="precio-pri">{{ $producto->precio ? '$' . $producto->precio : '' }}</h2>
                         </div>
 <!-- 
                         <div class="product-meta">

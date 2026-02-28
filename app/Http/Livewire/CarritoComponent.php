@@ -162,8 +162,7 @@ class CarritoComponent extends Component
         {
             $nombreProducto .= ' - ' . $color;
         }
-
-
+        
         \Cart::add(array(
             'id' => $id . ($talla ? '-' . $talla : '') . ($color ? '-' . $color : ''), // Unique ID for size variant
             'name' => $nombreProducto,
