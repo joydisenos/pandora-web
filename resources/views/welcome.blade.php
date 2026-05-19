@@ -365,9 +365,9 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-12">
                         <div class="descripcion-nosotros">
-                            <div class="title text-center">
-                                <small>Nuestro Blog</small>
-                                <h3 class="titulo-nosotros mb-4">Consejos, notas tip's y mucho más</h3>
+                            <div class="title text-center mb-5">
+                                <small class="blog-section-subtitle">NUESTRO BLOG</small>
+                                <h3 class="blog-section-title">Consejos, notas tip's y mucho más</h3>
                             </div>
                         </div>
                     </div>
@@ -375,14 +375,25 @@
                         <div class="row">
                             @foreach(postsPublicos(3) as $post)
                                 <div class="col-12 col-md-4 mb-4">
-                                    <a href="{{ route('blog.detalle' , $post->slug) }}">
-                                        <img src="{{ $post->imagen() }}" alt="" class="img-aliado mb-4">
-                                    </a>
-                                    <a href="{{ route('blog.detalle' , $post->slug) }}">
-                                        <h4 class="text-beige mb-2">{{ Str::limit($post->nombre , 80) }}</h4>
-                                    </a>
-                                    <p class="text-beige">{{ Str::limit(strip_tags($post->contenido) , 500) }}</p>
-                                    <a href="{{ route('blog.detalle' , $post->slug) }}" class="btn_1">Leer más</a>
+                                    <div class="blog-card">
+                                        <div class="blog-card-img-wrap">
+                                            <a href="{{ route('blog.detalle' , $post->slug) }}">
+                                                <img src="{{ $post->imagen() }}" alt="{{ $post->nombre }}" class="blog-card-img">
+                                            </a>
+                                            <span class="blog-card-badge">
+                                                {{ strtoupper($post->categoria() ?? 'CONSEJOS') }}
+                                            </span>
+                                        </div>
+                                        <div class="blog-card-body">
+                                            <a href="{{ route('blog.detalle' , $post->slug) }}" class="blog-card-title-link">
+                                                <h4 class="blog-card-title">{{ Str::limit($post->nombre , 80) }}</h4>
+                                            </a>
+                                            <a href="{{ route('blog.detalle' , $post->slug) }}" class="blog-card-link">LEER MÁS »</a>
+                                        </div>
+                                        <div class="blog-card-footer">
+                                            {{ $post->created_at ? $post->created_at->translatedFormat('d F, Y') : '12 junio, 2022' }} • 2 comentarios
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
