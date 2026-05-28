@@ -1679,6 +1679,10 @@ Route::get('/nuestra-marca', function () {
 //     return "Productos organizados correctamente.";
 // });
 
+Route::get('/mayoreo', function () {
+    return view('mayoreo');
+})->name('mayoreo');
+
 Route::get('/contacto', function () {
     return view('contacto');
 })->name('contacto');
@@ -1785,6 +1789,8 @@ Route::get('/carrito', function () {
     return view('carrito');
 })->name('carrito');
 
+
+
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
@@ -1793,9 +1799,9 @@ Route::middleware(['auth:sanctum'])->get('/panel', function () {
     return view('panel');
 })->name('panel');
 
-Route::middleware(['auth:sanctum'])->get('/favoritos', function () {
-    return view('favoritos');
-})->name('favoritos');
+Route::get('/favoritos', function () {
+    return view('wishlist');
+})->name('wishlist');
 
 Route::get('/completado', function () {
     return view('confirm');

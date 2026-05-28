@@ -28,9 +28,12 @@ class ContactoFormComponent extends Component
             'contacto.nombre' => 'required',
             'contacto.email' => 'required|email:rfc,dns',
             'contacto.telefono' => 'required',
-            'contacto.asunto' => 'required',
             'contacto.mensaje' => 'required',
         ]);
+
+        if (empty($this->contacto['asunto'])) {
+            $this->contacto['asunto'] = 'Mensaje de contacto de la web';
+        }
 
         Mail::to(opcionSlug('email_contacto'))->send(new ContactoMail($this->contacto));
 

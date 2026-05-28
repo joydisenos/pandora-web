@@ -1,38 +1,46 @@
-<div>
-    <form class="form-box" action="{{ route('enviar.contacto') }}" method="post" id="form-contacto" wire:submit.prevent="enviarContacto">
-      @csrf
-        @include('includes.mensajes')
-        <ul class="list-unstyled">
-            <li>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre:" wire:model="contacto.nombre">
-            </li>
-            <li>
-                <input type="tel" name="telefono" id="telefono" placeholder="Teléfono:" wire:model="contacto.telefono">
-            </li>
-            <li>
-                <input type="email" placeholder="Email:" name="email" id="email" wire:model="contacto.email">
-            </li>
-            <li>
-                <input type="text" placeholder="Asunto:" name="asunto" id="email" wire:model="contacto.asunto">
-            </li>
-            <li>
-                <textarea placeholder="Mensaje:" name="mensaje" id="mensaje" wire:model="contacto.mensaje"></textarea>
-            </li>
-        </ul>
+<div class="custom-form-contact">
+    @if(session()->has('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
-        <div class="submit-btn" wire:ignore>
+    <form action="#" method="post" wire:submit.prevent="enviarContacto">
+        @csrf
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Ingresa tu nombre completo" wire:model.defer="contacto.nombre" required>
+                @error('contacto.nombre') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
+            <div class="col-md-6">
+                <input type="email" class="form-control" placeholder="Correo electrónico address" wire:model.defer="contacto.email" required>
+                @error('contacto.email') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <input type="tel" class="form-control" placeholder="Teléfono" wire:model.defer="contacto.telefono" required>
+                @error('contacto.telefono') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <textarea class="form-control" placeholder="Mensaje" wire:model.defer="contacto.mensaje" required></textarea>
+                @error('contacto.mensaje') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        
+        <div class="text-center mt-3" wire:ignore>
             <button 
-            wire:loading.attr="disabled"
-            type="submit"
-            class="g-recaptcha"
-            id="submit" 
-            data-sitekey="{{ env('RECAPTCHA_WEB') }}" 
-            data-callback='onSubmit' 
-            data-action='submit'>
-              Enviar
-                  <figure class="mb-0">
-                      <img src="assets/images/top-arrow.png" alt="top-arrow">
-                  </figure>
+                wire:loading.attr="disabled"
+                type="submit"
+                class="btn-enviar-custom g-recaptcha"
+                data-sitekey="{{ env('RECAPTCHA_WEB', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI') }}" 
+                data-callback='onSubmit' 
+                data-action='submit'>
+                Enviar Mensaje &rarr;
             </button>
         </div>
     </form>

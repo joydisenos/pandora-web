@@ -6,33 +6,26 @@
                 <div id="blog" class="col-xl-12">
                     <div class="row">
                         @foreach($posts as $post)
-                            <div class="col-xl-6 col-lg-6 col-md-12">
-                                <div class="blog-box twocolumn-blog float-left w-100 post-item mb-4" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <div class="post-item-wrap position-relative">
-                                        <div class="post-image">
-                                            <a href="{{ route('blog.detalle' , $post->slug) }}">
-                                                <img alt="" src="{{ $post->imagen() }}" class="img-fluid">
-                                            </a>
-                                        </div>
-                                        <div class="lower-portion">
-                                            <i class="fas fa-user"></i>
-                                            <span class="text-size-14 text-mr">Autor : {{ $post->autor }}</span>
-                                            <i class="fas fa-tag"></i>
-                                            <span class="text-size-14">{{ $post->categoria() }}</span>
-                                            <h3>{{ $post->nombre }}</h3>
-                                            <p class="mb-0 text-size-16">{{ Str::limit($post->descripcion , 400) }}</p>
-                                        </div>
-                                        <div class="button-portion loadone_twocol">
-                                            <div class="date">
-                                                <i class="fas fa-calendar-alt"></i>
-                                                <span class="mb-0 text-size-14">{{ $post->created_at->format('M d,Y') }}</span>
-                                            </div>
-                                            <div class="button">
-                                                <a class="mb-0 read_more text-decoration-none"
-                                                    href="{{ route('blog.detalle' , $post->slug) }}">Ver</a>
-                                            </div>
-                                        </div>
+                            <div class="col-12 col-md-4 mb-4" data-aos="fade-up" data-aos-duration="700">
+                                <div class="blog-card">
+                                    <div class="blog-card-img-wrap">
+                                        <a href="{{ route('blog.detalle', $post->slug) }}">
+                                            <img src="{{ $post->imagen() }}" alt="{{ $post->nombre }}" class="blog-card-img">
+                                        </a>
+                                        <span class="blog-card-badge">
+                                            {{ strtoupper($post->categoria() ?? 'CONSEJOS') }}
+                                        </span>
+                                    </div>
+                                    <div class="blog-card-body">
+                                        <a href="{{ route('blog.detalle', $post->slug) }}" class="blog-card-title-link">
+                                            <h4 class="blog-card-title">{{ Str::limit($post->nombre, 80) }}</h4>
+                                        </a>
+                                        <p class="mb-3 text-size-14" style="color: #666; font-family: 'Quicksand', sans-serif;">{{ Str::limit($post->descripcion, 120) }}</p>
+                                        <a href="{{ route('blog.detalle', $post->slug) }}" class="blog-card-link">LEER MÁS »</a>
+                                    </div>
+                                    <div class="blog-card-footer">
+                                        {{ $post->created_at ? $post->created_at->translatedFormat('d F, Y') : '12 junio, 2022' }} •
+                                        2 comentarios
                                     </div>
                                 </div>
                             </div>

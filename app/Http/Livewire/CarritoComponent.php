@@ -184,43 +184,49 @@ class CarritoComponent extends Component
         ]);
     }
     
+    private function getWishlistSessionKey()
+    {
+        return auth()->check() ? 'wishlist_'.auth()->id() : 'wishlist_'.session()->getId();
+    }
+
     public function addFavorito($id)
     {
-        if(!auth()->user())
-        {
-            $this->emit('notificar' , [
-                'mensaje' => 'Para agregar productos a favoritos debe iniciar sesión o registrarse',
-                'tipo' => 'info',
-            ]);
-            return true;
-        }
-
         $producto = Producto::find($id);
 
-        $fav = Favorito::where('producto_id' , $id)->where('user_id' , auth()->user()->id)->first();
+        if (!$producto) {
+            return;
+        }
 
-        if($fav)
+        $sessionKey = $this->getWishlistSessionKey();
+        
+        $item = \Cart::session($sessionKey)->get($id);
+
+        if($item)
         {
-            $fav->delete();
+            \Cart::session($sessionKey)->remove($id);
             $this->emit('notificar' , [
-                'mensaje' => 'Producto se eliminó de favoritos',
+                'mensaje' => 'Producto eliminado de favoritos',
                 'tipo' => 'info',
             ]);
-            return true;
+        } else {
+            \Cart::session($sessionKey)->add(array(
+                'id' => $id,
+                'name' => $producto->nombre,
+                'price' => $producto->precio,
+                'quantity' => 1,
+                'attributes' => array(
+                    'imagen' => $producto->imagen(),
+                ),
+                'associatedModel' => $producto
+            ));
+
+            $this->emit('notificar' , [
+                'mensaje' => 'Producto agregado a Favoritos',
+                'tipo' => 'success',
+            ]);
         }
         
-        Favorito::create(array(
-            'producto_id' => $id,
-            'user_id' => auth()->user()->id,
-            'precio' => $producto->precio,
-            'imagen' => $producto->imagen(),
-            'nombre' => $producto->nombre,
-        ));
-
-        $this->emit('notificar' , [
-            'mensaje' => 'Producto agregado al Favoritos',
-            'tipo' => 'success',
-        ]);
+        $this->emit('wishlistUpdated');
     }
     
     public function removeProducto($id)

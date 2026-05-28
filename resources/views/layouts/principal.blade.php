@@ -9,19 +9,20 @@
     <title>{{ config('app.name') }} @yield('titulo')</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{{ asset('storage/imagenes') . '/' . opcionSlug('logotipo') }}">
+    <link rel="shortcut icon" href="{{ asset('img/corona.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon"
-        href="{{ asset('storage/imagenes') . '/' . opcionSlug('logotipo') }}">
+        href="{{ asset('img/corona.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-        href="{{ asset('storage/imagenes') . '/' . opcionSlug('logotipo') }}">
+        href="{{ asset('img/corona.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-        href="{{ asset('storage/imagenes') . '/' . opcionSlug('logotipo') }}">
+        href="{{ asset('img/corona.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-        href="{{ asset('storage/imagenes') . '/' . opcionSlug('logotipo') }}">
+        href="{{ asset('img/corona.png') }}">
 
     <!-- GOOGLE WEB FONT-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -35,6 +36,160 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet">
     @include('includes.styles')
+    <style>
+        /* Typography */
+        body, p, a, span, div, button, input, select, textarea {
+            font-family: 'Quicksand', sans-serif !important;
+        }
+        h1, h2, h3, h4, h5, h6, .gilda-font {
+            font-family: 'Gilda Display', serif !important;
+        }
+
+        /* Flip Card Styles */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 15px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border: 1px solid #ddd;
+        }
+
+        .frame-producto:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flip-card-front img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        .flip-card-back {
+            background-color: #fff;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Variant Buttons */
+        .variant-square {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            background: #fff;
+            transition: 0.2s;
+        }
+        .variant-square:hover {
+            border-color: #d48a1f;
+        }
+        .variant-square.selected {
+            background-color: #d48a1f;
+            color: #fff;
+            border-color: #d48a1f;
+        }
+
+        /* Disabled Add to Cart */
+        .btn-add-disabled {
+            background-color: #f1eee9 !important;
+            color: #a3a3a3 !important;
+            pointer-events: none;
+            border: none !important;
+        }
+
+        /* Tienda Category Buttons */
+        .inactive-cat {
+            background-color: #fff !important;
+            color: #D48A1F !important;
+            border: 1px solid #D48A1F !important;
+            border-radius: 0;
+            padding: 12px;
+            font-size: 1.05rem;
+        }
+        .inactive-cat:hover, .inactive-cat:focus {
+            background-color: #fff !important;
+            color: #D48A1F !important;
+            border-color: #D48A1F !important;
+            box-shadow: none !important;
+        }
+        .active-cat {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid #000 !important;
+            border-radius: 0;
+            padding: 12px;
+            font-size: 1.05rem;
+        }
+        .active-cat:hover, .active-cat:focus {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: none !important;
+        }
+        /* Default state: white links and icons */
+        header.fixed_header nav ul li a,
+        header.fixed_header .col-2 ul li a {
+            color: #fff !important;
+            transition: color 0.3s ease;
+        }
+        
+        /* Default state hover: orange */
+        header.fixed_header nav ul li a:hover,
+        header.fixed_header .col-2 ul li a:hover {
+            color: #D48A1F !important;
+        }
+
+        /* Sticky state: black links and icons */
+        header.fixed_header.sticky nav ul li a,
+        header.fixed_header.sticky .col-2 ul li a {
+            color: #000 !important;
+        }
+
+        /* Sticky state hover: orange */
+        header.fixed_header.sticky nav ul li a:hover,
+        header.fixed_header.sticky .col-2 ul li a:hover {
+            color: #D48A1F !important;
+        }
+
+        /* Remove bottom line effect */
+        header.fixed_header nav ul li a.animated_link:before,
+        header.fixed_header nav ul li a.animated_link:after,
+        header.fixed_header .col-2 ul li a.animated_link:before,
+        header.fixed_header .col-2 ul li a.animated_link:after {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,12 +218,12 @@
                         
                         <nav id="mainNav">
                             <ul>
-                                <li><a href="{{ route('home')}}" class="animated_link">Inicio</a></li>
-                                <li><a href="{{ route('tienda')}}" class="animated_link">Tienda</a></li>
-                                <li><a href="{{ route('nosotros')}}" class="animated_link">Nosotros</a></li>
-                                <li><a href="{{ route('tienda')}}" class="animated_link">Mayoreo</a></li>
-                                <li><a href="{{ route('contacto') }}" class="animated_link">Contacto</a></li>
-                                <li><a href="{{ route('blog')}}" class="animated_link">Blog</a></li>
+                                <li><a href="{{ route('home')}}" class="animated_link text-uppercase">INICIO</a></li>
+                                <li><a href="{{ route('tienda')}}" class="animated_link text-uppercase">TIENDA</a></li>
+                                <li><a href="{{ route('nosotros')}}" class="animated_link text-uppercase">NOSOTROS</a></li>
+                                <li><a href="{{ route('mayoreo')}}" class="animated_link text-uppercase">MAYOREO</a></li>
+                                <li><a href="{{ route('contacto') }}" class="animated_link text-uppercase">CONTACTO</a></li>
+                                <li><a href="{{ route('blog')}}" class="animated_link text-uppercase">BLOG</a></li>
                                 
                             </ul>
                         </nav>
@@ -81,24 +236,39 @@
                 </div>
 
                 <div class="col-2">
-                    <div class="d-flex">
-                        @guest
-                            <a href="{{ route('login')}}" class="animated_link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    <ul class="d-flex align-items-center justify-content-end list-unstyled mb-0 gap-3">
+                        <li>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#searchModal" class="animated_link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                 </svg>
                             </a>
-                        @else
-                            <a href="{{ route('panel')}}" class="animated_link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </li>
+                        <li>
+                            <a href="{{ route('wishlist') }}" class="animated_link position-relative d-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                 </svg>
+                                @livewire('wishlist-boton-component')
                             </a>
-                        @endguest
+                        </li>
+                        <li>
+                            @guest
+                                <a href="{{ route('login')}}" class="animated_link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                    </svg>
+                                </a>
+                            @else
+                                <a href="{{ route('panel')}}" class="animated_link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                    </svg>
+                                </a>
+                            @endguest
+                        </li>
                         <li>@livewire('carrito-boton-component')</li>
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div><!-- container -->
@@ -256,7 +426,7 @@
                             </a>
                         </li>
                         <li class="footer-link-item">
-                            <a href="{{ route('tienda') }}" class="footer-link">
+                            <a href="{{ route('mayoreo') }}" class="footer-link">
                                 <span>Mayoreo</span>
                                 <span class="footer-link-arrow">→</span>
                             </a>
@@ -415,6 +585,29 @@
         </svg>
     </div>
     <!-- /back to top -->
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background-color: rgba(255, 255, 255, 0.85); border: none;">
+                <div class="modal-header border-0 pt-4 pe-4">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <form action="{{ route('tienda') }}" method="GET" class="w-100" style="max-width: 600px;">
+                        <div class="input-group input-group-lg">
+                            <input type="text" name="buscar" class="form-control border-0 border-bottom bg-transparent shadow-none" placeholder="Buscar productos..." style="font-size: 2rem; border-radius: 0; border-color: #000 !important; color: #000;" autofocus required>
+                            <button class="btn btn-link text-dark shadow-none" type="submit" style="font-size: 2rem; border: none; border-radius: 0; padding-right: 0; padding-left: 1rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @stack('modals')
     @livewireScripts
     <!-- COMMON SCRIPTS -->
@@ -429,18 +622,69 @@
 
     @yield('scripts')
     <script>
+        function selectVariantCard(element, type) {
+            var container = $(element).closest('.variants-container');
+            var frame = $(element).closest('.frame-producto');
+            var btnCarrito = frame.find('.agregar-carrito');
+            var val = $(element).data('val');
+
+            // Toggle selection
+            if ($(element).hasClass('selected')) {
+                $(element).removeClass('selected');
+                if(type === 'talla') btnCarrito.attr('data-talla', '');
+                if(type === 'color') btnCarrito.attr('data-color', '');
+            } else {
+                // Deselect siblings
+                container.find('.v-' + type).removeClass('selected');
+                $(element).addClass('selected');
+                if(type === 'talla') btnCarrito.attr('data-talla', val);
+                if(type === 'color') btnCarrito.attr('data-color', val);
+            }
+
+            // Validate requirements
+            var reqTalla = container.data('req-talla') === true || container.data('req-talla') === 'true';
+            var reqColor = container.data('req-color') === true || container.data('req-color') === 'true';
+            
+            var hasTalla = btnCarrito.attr('data-talla') !== '';
+            var hasColor = btnCarrito.attr('data-color') !== '';
+
+            var valid = true;
+            if(reqTalla && !hasTalla) valid = false;
+            if(reqColor && !hasColor) valid = false;
+
+            if (valid) {
+                btnCarrito.removeClass('btn-add-disabled');
+            } else {
+                btnCarrito.addClass('btn-add-disabled');
+            }
+        }
+
         $('body').on('click', '.agregar-carrito', function (e) {
             e.preventDefault();
+            if ($(this).hasClass('btn-add-disabled')) {
+                // If it's disabled, maybe show an alert or just do nothing
+                return;
+            }
+
             // Buscar el input .cantidad-carrito dentro del mismo frame-producto
             var cantidad = $(this).closest('.frame-producto').find('.cantidad-carrito').val();
             var productoId = $(this).data('id');
+            var talla = $(this).attr('data-talla') || null;
+            var color = $(this).attr('data-color') || null;
 
             // Asegurar que la cantidad sea al menos 1
             cantidad = parseInt(cantidad) || 1;
             if (cantidad < 1) cantidad = 1;
 
-            Livewire.emit('addProducto', productoId, cantidad);
+            Livewire.emit('addProducto', productoId, cantidad, talla, color);
         });
+
+        $('body').on('click', '.agregar-favorito', function (e) {
+            e.preventDefault();
+            var productoId = $(this).data('id');
+            Livewire.emit('addFavorito', productoId);
+        });
+
         $('body').on('click', '.agregar-carrito-detalle', function (e) {
             e.preventDefault();
             Livewire.emit('addProducto', $(this).data('id') , $('#quantityInput').val() );
@@ -458,6 +702,24 @@
             }
         });
     </script>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" style="z-index: 1055;">
+        <div class="modal-content" style="border-radius: 0;">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="privacyModalLabel">Política de Privacidad</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="font-size: 0.95rem; text-align: justify;">
+            {!! nl2br(opcionSlug('politica_privacidad')) !!}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn text-white fw-bold" data-bs-dismiss="modal" style="border-radius: 0; background-color: #D48A1F;">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 </body>
 

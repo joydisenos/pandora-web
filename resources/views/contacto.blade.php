@@ -1,91 +1,174 @@
 @extends('layouts.principal')
 @section('content')
+<style>
+    /* Styling for the new contact section */
+    .contact-top-section {
+        background-color: #fff;
+        padding: 60px 0;
+    }
+    .contact-item {
+        text-align: center;
+        padding: 20px;
+    }
+    .contact-item i {
+        font-size: 30px;
+        color: #333;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .contact-item h4 {
+        color: #D48A1F;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-transform: none;
+    }
+    .contact-item p {
+        color: #555;
+        font-size: 14px;
+        margin: 0;
+    }
+    .contact-item a {
+        color: #555;
+    }
+    .wavy-divider {
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        margin-top: -5px;
+        background-color: #fff;
+    }
+    .wavy-divider svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 40px;
+    }
+    .wavy-divider .shape-fill {
+        fill: #f5f4ef;
+    }
+    .contact-bottom-section {
+        background-color: #f5f4ef;
+        padding: 40px 0 80px 0;
+        text-align: center;
+    }
+    .contact-bottom-section .small-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #666;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    .contact-bottom-section h2 {
+        color: #D48A1F;
+        font-size: 32px;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    .contact-bottom-section .subtitle {
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+    .custom-form-contact {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    .custom-form-contact .form-control {
+        background-color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+    .custom-form-contact .form-control::placeholder {
+        color: #999;
+        font-size: 14px;
+    }
+    .custom-form-contact textarea.form-control {
+        height: 150px;
+        resize: none;
+    }
+    .btn-enviar-custom {
+        background-color: #D48A1F;
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn-enviar-custom:hover {
+        background-color: #b57316;
+        color: #fff;
+    }
+</style>
+
 <div class="hero medium-height jarallax" data-jarallax data-speed="0.2">
-            <img class="jarallax-img" src="{{ asset('assets/img/actualidad_riviera_blog.webp') }}" alt="">
-            <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-                <div class="container">
-                    <small class="slide-animated one">Pandora</small>
-                    <h1 class="slide-animated two">Contacto</h1>
+    <img class="jarallax-img" src="{{ asset('assets/img/actualidad_riviera_blog.webp') }}" alt="">
+    <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+        <div class="container">
+            <small class="slide-animated one">Pandora</small>
+            <h1 class="slide-animated two">Contacto</h1>
+        </div>
+    </div>
+</div>
+<!-- /Background Img Parallax -->
+
+<!-- Top Section: Contact Info -->
+<div class="contact-top-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="contact-item">
+                    <i class="bi bi-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:{{ opcionSlug('email_contacto') }}">{{ opcionSlug('email_contacto') }}</a></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-item">
+                    <i class="bi bi-geo-alt"></i>
+                    <h4>Dirección</h4>
+                    <p>{{ opcionSlug('direccion') }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-item">
+                    <i class="bi bi-telephone"></i>
+                    <h4>Teléfonos</h4>
+                    <p>{!! nl2br(e(opcionSlug('telefono_contacto'))) !!}</p>
                 </div>
             </div>
         </div>
-        <!-- /Background Img Parallax -->
+    </div>
+</div>
 
-        <div class="container margin_120_95">
-            <div class="row justify-content-between">
-                <div class="col-xl-4 col-lg-5 order-lg-2">
-                    <div class="contact_info">
-                        <ul class="clearfix">
-                            <li>
-                                <i class="bi bi-geo-alt"></i>
-                                <h4>Dirección</h4>
-                                <div>{{ opcionSlug('direccion') }}</div>
-                            </li>
-                            <li>
-                                <i class="bi bi-envelope-paper"></i>
-                                <h4>Email</h4>
-                                <p><a href="#0">{{ opcionSlug('email_contacto') }}</a></p>
-                            </li>
-                            <li>
-                                <i class="bi bi-telephone"></i>
-                                <h4>Teléfono</h4>
-                                <div>{{ opcionSlug('telefono_contacto') }}</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-7 order-lg-1">
-                    <h3 class="mb-3">Contáctanos</h3>
-                    <div id="message-contact"></div>
-                    <form method="post" action="phpmailer/contact_template_email.php" id="contactform" autocomplete="off">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-floating mb-4">
-                                    <input class="form-control" type="text" id="name_contact" name="name_contact" placeholder="Nombre">
-                                    <label for="name_contact">Nombre</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-floating mb-4">
-                                    <input class="form-control" type="text" id="lastname_contact" name="lastname_contact" placeholder="Apellido">
-                                    <label for="lastname_contact">Apellido</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-floating mb-4">
-                                    <input class="form-control" type="email" id="email_contact" name="email_contact" placeholder="Email">
-                                    <label for="email_contact">Email</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-floating mb-4">
-                                    <input class="form-control" type="text" id="phone_contact" name="phone_contact" placeholder="Teléfono">
-                                    <label for="phone_contact">Teléfono</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                        <div class="form-floating mb-4">
-                            <textarea class="form-control" placeholder="Mensaje" id="message_contact" name="message_contact"></textarea>
-                            <label for="message_contact">Mensaje</label>
-                        </div>
-                        <p class="mt-3"><input type="submit" value="Enviar" class="btn_1 outline" id="submit-contact"></p>
-                    </form>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!--/container -->
+<!-- Wavy Divider -->
+<div class="wavy-divider">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,111.47,192.39,94.2,236.84,81.79,279.14,70.18,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+</div>
 
-        <div class="map_contact">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.4364241114604!2d-73.96780638459853!3d40.774418641731515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258a29d3847f5%3A0x564dfbba0141774a!2s5th%20Ave%2C%20New%20York%2C%20NY%2C%20Stati%20Uniti!5e0!3m2!1sit!2ses!4v1661414716655!5m2!1sit!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <!--/map_contact -->
+<!-- Bottom Section: Form -->
+<div class="contact-bottom-section">
+    <div class="container">
+        <div class="small-title">CONTÁCTANOS</div>
+        <h2>Envíanos un mensaje</h2>
+        <p class="subtitle">Uno de nuestros ejecutivos te ayudará a solucionar tus dudas o comentarios de inmediato.</p>
+
+        @livewire('contacto-form-component')
+
+    </div>
+</div>
 
 @endsection
+
 @section('scripts')
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>

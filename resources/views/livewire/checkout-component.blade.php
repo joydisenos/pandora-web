@@ -57,19 +57,19 @@
                         </h4>
                         
                         <div class="mb-3">
-                            <label class="form-label">Método de Pago Preferido *</label>
-                            <div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoTransferencia" wire:model="orden.contacto" value="Transferencia Bancaria" checked>
-                                    <label class="form-check-label" for="pagoTransferencia">
-                                        Transferencia Bancaria
-                                    </label>
+                            <label class="form-label fw-bold">Método de Pago Preferido *</label>
+                            <div class="mt-2">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoACH" wire:model="orden.contacto" value="ACH" checked>
+                                    <label class="form-check-label" for="pagoACH">ACH</label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoEfectivo" wire:model="orden.contacto" value="Efectivo">
-                                    <label class="form-check-label" for="pagoEfectivo">
-                                        Efectivo
-                                    </label>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoYappy" wire:model="orden.contacto" value="Yappy">
+                                    <label class="form-check-label" for="pagoYappy">Yappy</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoTarjeta" wire:model="orden.contacto" value="Pago con tarjeta">
+                                    <label class="form-check-label" for="pagoTarjeta">Pago con tarjeta</label>
                                 </div>
                             </div>
                         </div>
@@ -120,25 +120,37 @@
                         
                         
                         
+                        @if(isset($impuesto) && $impuesto > 0)
+                        <div class="mb-1">
+                            <p class="text-muted small text-right mb-0">
+                                <strong>ITBMS: ${{ number_format($impuesto, 2) }}</strong>
+                            </p>
+                        </div>
+                        @endif
                         <div class="mb-0">
                             <p class="text-muted small text-right mb-0">
-                                <strong>Total: ${{ $total }}</strong>
+                                <strong>Total: ${{ number_format($total, 2) }}</strong>
                             </p>
                         </div>
                         <hr>
-                        <!-- <div class="form-check mb-3">
+                        
+                        <div class="mb-4 text-muted" style="font-size: 0.8rem; text-align: justify;">
+                            Sus datos personales se utilizarán para procesar su pedido, respaldar su experiencia en este sitio web y para otros fines descritos en nuestro <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-dark fw-bold text-decoration-underline">privacy policy</a>.
+                        </div>
+                        
+                        <div class="form-check mb-4">
                             <input class="form-check-input" type="checkbox" id="terminos" required>
-                            <label class="form-check-label small" for="terminos">
-                                Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a>
+                            <label class="form-check-label text-dark fw-bold" for="terminos" style="font-size: 0.85rem;">
+                                Estoy de acuerdo con los términos y condiciones. *
                             </label>
-                        </div> -->
+                        </div>
 
 						<div class="mb-4">
 							@include('includes.mensajes')
                         </div>
                         
-                        <button class="d-block btn-pri-claro w-100 py-2 mb-3" wire:click.prevent="ordenar">
-                            <i class="bi bi-send me-2"></i>Completar Compra
+                        <button class="d-block w-100 py-3 mb-3 fw-bold shadow-sm" wire:click.prevent="ordenar" style="background-color: #D48A1F; color: #fff; border: none; border-radius: 0; font-size: 0.95rem;">
+                            Completar Compra
                         </button>
                         
                         <a href="{{ route('carrito') }}" class="d-block btn-pri-blanco w-100 py-2 text-center">
@@ -156,5 +168,7 @@
             </div>
         </div>
     </div>
+
+
 
 </div>
